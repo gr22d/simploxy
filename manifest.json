@@ -1,0 +1,30 @@
+{
+  "manifest_version": 2,
+  "name": "Simploxy",
+  "description": "Simple! and proxy!",
+  "homepage_url": "https://github.com/gr22d",
+  "version": "1.0.0",
+  "icons": {
+    "64": "icons/default-64.png"
+  },
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "browser_action": {
+    "default_icon": "icons/default-64.png",
+    "default_title": "Simple! and Proxy!"
+  },
+  "commands": {
+    "toggle-xpath": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Space",
+        "mac": "Command+Shift+Space"
+      },
+      "description": "Simple! and Proxy!"
+    }
+  },
+  "options_ui": {
+    "page": "options.html"
+  },
+  "permissions": ["activeTab","<all_urls>","storage","proxy","tabs","unlimitedStorage","webRequest","webRequestBlocking"]
+}
