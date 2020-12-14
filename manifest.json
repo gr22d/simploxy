@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Simploxy",
   "description": "Simple! and proxy!",
-  "homepage_url": "https://github.com/gr22d",
+  "homepage_url": "https://github.com/gr22d/simploxy",
   "version": "1.0.0",
   "icons": {
     "64": "icons/default-64.png"
