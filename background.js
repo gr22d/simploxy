@@ -1,5 +1,4 @@
 const browserAppData = this.browser || this.chrome;
-const tabs = {};
 const activeIcon = 'active-64.png';
 const defaultIcon = 'default-64.png';
 
@@ -16,6 +15,7 @@ function startProxy(op_pr_server, op_pr_port) {
     }
   };
   chrome.proxy.settings.set({value: config, scope: "regular"}, function() {});
+  
 }
 
 function stopProxy() {
@@ -24,71 +24,51 @@ function stopProxy() {
 }
 var keys = ["proxy_server","proxy_port","popup_flag"];
 
-const inspect = {
-  toggleActivate: (type) => {
-	if(type == 'activate'){
-		browserAppData.storage.local.get(keys, function(items) {
-		var pserver = items.proxy_server;
-		var pp = items.proxy_port;
-		var pf = items.popup_flag;
-		pp = Number(pp);
-		startProxy(pserver,pp);
-		if(pf == true){
-		chrome.proxy.settings.get(
-		  {'incognito': false},
-		  function(config) {
-			var host=JSON.stringify(config.value.rules.singleProxy.host);
-			var port=JSON.stringify(config.value.rules.singleProxy.port);
-			
-			window.alert(' ++ PROXY ON ++ \n\nHOST : '+host+'\nPORT : '+port);
-		  });
-		}
-		});
-
-		
-		browserAppData.browserAction.setIcon({path: { 19: 'icons/' + activeIcon } });
-	}
-	else
-	{
-		
-		browserAppData.storage.local.get(keys, function(items) {
-		var pf = items.popup_flag;
-		if(pf == true){
-			window.alert(' ++ PROXY OFF ++ ');}
-		stopProxy();
-		});
-		
-		browserAppData.browserAction.setIcon({path: { 19: 'icons/' + defaultIcon } });
-	}
-
-    
-  }
-};
-
-function toggle(tab) {
+browserAppData.commands.onCommand.addListener(function(command){
+	if (command == 'toggle-proxy') {
 	chrome.proxy.settings.get(
 		  {'incognito': false},
 		  function(config) {
 			var proxy_type = JSON.stringify(config.value.mode);
-			if(proxy_type == '"direct"'){
-				inspect.toggleActivate('activate');
+			if(proxy_type == '"fixed_servers"'){
+			browserAppData.browserAction.setIcon({path: { 19: 'icons/' + defaultIcon } });
+			browserAppData.storage.local.get({popup_flag: true}, function(items) {
+				var pf = items.popup_flag;
+				if(pf == true){
+					window.alert(' ++ PROXY OFF ++ ');}
+				stopProxy();
+			});
+
+				
 			}
 			else
-			{
-				inspect.toggleActivate('deactivate');
+			{	
+				browserAppData.browserAction.setIcon({path: { 19: 'icons/' + activeIcon } });
+			
+				browserAppData.storage.local.get({
+						proxy_server: '127.0.0.1',
+						proxy_port: 8080,
+						popup_flag: true
+					  }, function(items) {
+					var pserver = items.proxy_server;
+					var pp = items.proxy_port;
+					var pf = items.popup_flag;
+					
+					pp = Number(pp);
+					startProxy(pserver,pp);
+					if(pf == true){
+						window.alert(' ++ PROXY ON ++ \n\n-HOST : '+pserver+' -PORT : '+pp+'\n\n[!!] If you don\'t want pop-up, Set options');
+						}
+				});
+				
+				
 			}
+
+			
+			
+			
 		  }
 		);
-}
-
-
-
-browserAppData.commands.onCommand.addListener(command => {
-  if (command === 'toggle-xpath') {
-    browserAppData.tabs.query({ active: true, currentWindow: true }, tab => {
-      toggle(tab[0]);
-    });
-  }
+	}
 });
 
-browserAppData.browserAction.onClicked.addListener(toggle);
