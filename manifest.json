@@ -1,4 +1,6 @@
 {
+"update_url": "https://clients2.google.com/service/update2/crx",
+
   "manifest_version": 2,
   "name": "Simploxy",
   "description": "Simple! and proxy!",
@@ -12,19 +14,17 @@
   },
   "browser_action": {
     "default_icon": "icons/default-64.png",
-    "default_title": "Simple! and Proxy!"
+    "default_title": "Simple! and Proxy!",
+	"default_popup": "options.html"
   },
   "commands": {
-    "toggle-xpath": {
+    "toggle-proxy": {
       "suggested_key": {
         "default": "Ctrl+Shift+Space",
         "mac": "Command+Shift+Space"
       },
-      "description": "Simple! and Proxy!"
+      "description": "Set your custom command."
     }
   },
-  "options_ui": {
-    "page": "options.html"
-  },
-  "permissions": ["activeTab","<all_urls>","storage","proxy","tabs","unlimitedStorage","webRequest","webRequestBlocking"]
+  "permissions": ["storage","proxy"]
 }
