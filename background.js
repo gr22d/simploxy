@@ -32,7 +32,7 @@ browserAppData.commands.onCommand.addListener(function(command){
 			var proxy_type = JSON.stringify(config.value.mode);
 			if(proxy_type == '"fixed_servers"'){
 			browserAppData.browserAction.setIcon({path: { 19: 'icons/' + defaultIcon } });
-			browserAppData.storage.local.get({popup_flag: true}, function(items) {
+			browserAppData.storage.local.get({popup_flag: false}, function(items) {
 				var pf = items.popup_flag;
 				if(pf == true){
 					window.alert(' ++ PROXY OFF ++ ');}
@@ -48,7 +48,7 @@ browserAppData.commands.onCommand.addListener(function(command){
 				browserAppData.storage.local.get({
 						proxy_server: '127.0.0.1',
 						proxy_port: 8080,
-						popup_flag: true
+						popup_flag: false
 					  }, function(items) {
 					var pserver = items.proxy_server;
 					var pp = items.proxy_port;
