@@ -6,9 +6,9 @@ Chrome Extension
 
 Command++
 
-windows : Ctrl + Shift + SpaceBar
+**windows** : Ctrl + Shift + SpaceBar
 
-Mac : Ctrl + Shift + Spacebar
+**Mac** : Ctrl + Shift + Spacebar
 
 
 
