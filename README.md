@@ -8,7 +8,7 @@ Command++
 
 **windows** : Ctrl + Shift + SpaceBar
 
-**Mac** : Ctrl + Shift + Spacebar
+**Mac** : command + Shift + Spacebar
 
 
 
