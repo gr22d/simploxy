@@ -5,7 +5,7 @@
   "name": "Simploxy",
   "description": "Simple! and proxy!",
   "homepage_url": "https://github.com/gr22d/simploxy",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "icons": {
     "64": "icons/default-64.png"
   },
